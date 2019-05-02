@@ -1,65 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Mm1 from './components/MM1';
+import React, { Component } from 'react';
+import './App.css';
+import Home from './components/Home';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-function TabContainer(props) {
-  return (
-      <Typography component="div" style={{ padding: 8 * 3 }}>
-        {props.children}
-      </Typography>
-  );
-}
 
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-});
-
-class SimpleTabs extends React.Component {
-  state = {
-    value: 0,
-  };
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
+class App extends Component {
 
   render() {
-    const { classes } = this.props;
-    const { value } = this.state;
-
     return (
-        <div className={classes.root}>
-          <AppBar position="static">
-            <Tabs value={value} onChange={this.handleChange}>
-              <Tab label="Modelo M/M/1" />
-              <Tab label="Modelo M/M/S" />
-              <Tab label="Modelo M/M/S/K" />
-              <Tab label="Modelo M/G/1" />
-            </Tabs>
-          </AppBar>
-          {value === 0 && <TabContainer>M/M/1</TabContainer>}
-          {value === 1 && <TabContainer>M/M/S</TabContainer>}
-          {value === 2 && <TabContainer>M/M/S/K</TabContainer>}
-          {value === 3 && <TabContainer>M/G/1</TabContainer>}
-        </div>
+        <BrowserRouter>
+          <div className = "home">
+            <Route exact path = "/" component = { Home } />
+          </div>
+        </BrowserRouter>
     );
   }
 }
 
-SimpleTabs.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(SimpleTabs);
+export default App;
