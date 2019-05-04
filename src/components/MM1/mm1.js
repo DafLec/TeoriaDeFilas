@@ -10,12 +10,12 @@ const lambda = 0,  m = 0, p = 0, pn = 0, p0 = 0, n = 0;
 //Cost and function variables
 const l = 0, lq = 0, w = 0, wq = 0;
 const cs = 0, cw = 0, ct = 0;
-
+var showResults=false;
 class Mm1 extends Component{
 
     constructor(props) {
         super(props);
-        this.state = {lambda, m, p, pn, p0, n, l, lq, w, wq, cs, cw, ct};
+        this.state = {lambda, m, p, pn, p0, n, l, lq, w, wq, cs, cw, ct, showResults};
         this.lambdaChange = this.lambdaChange.bind(this);
         this.mChange = this.mChange.bind(this);
         this.calculateP = this.calculateP.bind(this);
@@ -29,6 +29,8 @@ class Mm1 extends Component{
         this.csChange = this.csChange.bind(this);
         this.cwChange = this.cwChange.bind(this);
         this.calculateCt = this.calculateCt.bind(this);
+
+        this.handleClick = this.handleClick.bind(this);
     }
 
     //Handle changes in variables
@@ -178,6 +180,11 @@ class Mm1 extends Component{
         let res = Number(lq) * Number(cw) + Number(cs);
         this.setState({ct: res.toFixed(4)});
     }
+    
+    handleClick() {
+        console.log('calculating queue');
+        this.setState({showResults:true});
+    }
 
     render() {
         return (<React.Fragment>
@@ -224,27 +231,30 @@ class Mm1 extends Component{
                                        onChange={this.cwChange}/>
                         </Grid>
                     </Grid>
-                    <Button variant="contained" color="primary">Aceptar</Button>
+                    <Button variant="contained" color="primary" onClick={this.handleClick}>Aceptar</Button>
                 </form>
-            { Number(this.state.lambda) >= Number(this.state.m) ?
-                <div className="alert alert-danger" role="alert">
-                    Sistema no estable
-                </div> :
-                <div>
-                    <Typography variant="h4" gutterBottom>
-                        Resultados
-                    </Typography>
-                <ul className="list-group">
-                    <li className="list-group-item">Factor de Utilización (Ρ): <strong>{ this.state.p }</strong></li>
-                    <li className="list-group-item">Probabilidad 0 Clientes en la Sistema (P0): <strong>{ this.state.p0 }</strong></li>
-                    <li className="list-group-item">Promedio Clientes en la Cola (LQ): <strong>{ this.state.lq }</strong></li>
-                    <li className="list-group-item">Promedio Clientes en el Sistema (L): <strong>{ this.state.l }</strong></li>
-                    <li className="list-group-item">Tiempo Esperado en la Cola (WQ): <strong>{ this.state.wq }</strong></li>
-                    <li className="list-group-item">Tiempo Esperado en el Sistema (W): <strong>{ this.state.w }</strong></li>
-                    <li className="list-group-item">Probabilidad (Pn): <strong>{ this.state.pn }</strong></li>
-                    <li className="list-group-item">Costo Total Esperado (CT): <strong>{ this.state.ct }</strong></li>
-                </ul>
-                </div>
+            { this.state.showResults ?
+                Number(this.state.lambda) >= Number(this.state.m) ?
+                    <div className="alert alert-danger" role="alert">
+                        Sistema no estable
+                    </div> :
+                    <div>
+                        <Typography variant="h4" gutterBottom>
+                            Resultados
+                        </Typography>
+                    <ul className="list-group">
+                        <li className="list-group-item">Factor de Utilización (Ρ): <strong>{ this.state.p }</strong></li>
+                        <li className="list-group-item">Probabilidad 0 Clientes en la Sistema (P0): <strong>{ this.state.p0 }</strong></li>
+                        <li className="list-group-item">Promedio Clientes en la Cola (LQ): <strong>{ this.state.lq }</strong></li>
+                        <li className="list-group-item">Promedio Clientes en el Sistema (L): <strong>{ this.state.l }</strong></li>
+                        <li className="list-group-item">Tiempo Esperado en la Cola (WQ): <strong>{ this.state.wq }</strong></li>
+                        <li className="list-group-item">Tiempo Esperado en el Sistema (W): <strong>{ this.state.w }</strong></li>
+                        <li className="list-group-item">Probabilidad (Pn): <strong>{ this.state.pn }</strong></li>
+                        <li className="list-group-item">Costo Total Esperado (CT): <strong>{ this.state.ct }</strong></li>
+                    </ul>
+                    </div>
+                :
+                <div></div>
             }
         </React.Fragment>);
     }
