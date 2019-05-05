@@ -116,7 +116,7 @@ class Mg1 extends Component{
         const m = this.state.m;
         let res = lambda/m;
         this.setState({p: res.toFixed(4)});
-        return res.toFixed(4);
+        return res;
     }
 
     calculatePn(){
@@ -125,11 +125,13 @@ class Mg1 extends Component{
         const n = this.state.n;
         let res = (1-(lambda/m))*(Math.pow(lambda/m,n));
         this.setState({pn: res.toFixed(4)});
+        return res;
     }
 
     calculateP0(){
         let res = 1-this.calculateP();
         this.setState({p0: res.toFixed(4)});
+        return res;
     }
 
     calculateL() {
@@ -162,7 +164,7 @@ class Mg1 extends Component{
                 this.setState({lq: Number(res).toFixed(4)});
                 break;
             case 2:
-                res = (Math.pow(lambda, 2) * variance + Math.pow(p,2))/(2*(1-p));
+                res = (Math.pow(lambda, 2) *  variance + Math.pow(p,2))/(2*(1-p));
                 this.setState({lq: Number(res).toFixed(4)});
                 break;
             case 3:
@@ -213,7 +215,7 @@ class Mg1 extends Component{
 
         return (<React.Fragment>
             <Typography variant="h3" gutterBottom>
-                M/M/G/1
+                M/G/1
             </Typography>
 
             <form id="form">
