@@ -10,7 +10,8 @@ const lambda = 0,  m = 0, p = 0, pn = 0, p0 = 0, n = 0;
 //Cost and function variables
 const l = 0, lq = 0, w = 0, wq = 0;
 const cs = 0, cw = 0, ct = 0;
-var showResults=false;
+var showResults = false;
+
 class Mm1 extends Component{
 
     constructor(props) {
@@ -89,7 +90,7 @@ class Mm1 extends Component{
     nChange(evt){
         if(Number(evt.target.value < 0)){
             this.setState({n: 0}, () => {
-               this.calculatePn();
+                this.calculatePn();
             });
         }else{
             this.setState({n: evt.target.value}, () => {
@@ -186,53 +187,58 @@ class Mm1 extends Component{
         this.setState({showResults:true});
     }
 
+    handleClick() {
+        this.setState({showResults:true});
+    }
+
     render() {
         return (<React.Fragment>
-                <Typography variant="h3" gutterBottom>
-                    M/M/1
-                </Typography>
+            <Typography variant="h3" gutterBottom>
+                M/M/1
+            </Typography>
 
-                <form id="form">
-                    <Grid container spacing={18}>
-                        <Grid item xs={12} sm={6}>
-                            <TextField margin="normal"
-                                       id="lambda"
-                                       label="lambda"
-                                       type="number"
-                                       onChange={this.lambdaChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField margin="normal"
-                                       id="m"
-                                       label="m"
-                                       type="number"
-                                       onChange={this.mChange}/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField margin="normal"
-                                       id="n"
-                                       label="n"
-                                       type="number"
-                                       onChange={this.nChange}/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField margin="normal"
-                                       id="cs"
-                                       label="cs"
-                                       type="number"
-                                       onChange={this.csChange}/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField margin="normal"
-                                       id="cw"
-                                       label="cw"
-                                       type="number"
-                                       onChange={this.cwChange}/>
-                        </Grid>
+            <form id="form">
+                <Grid container spacing={16}>
+                    <Grid item xs={12} sm={6}>
+                        <TextField margin="normal"
+                                   id="lambda"
+                                   label="lambda"
+                                   type="number"
+                                   onChange={this.lambdaChange}
+                        />
                     </Grid>
-                    <Button variant="contained" color="primary" onClick={this.handleClick}>Aceptar</Button>
-                </form>
+                    <Grid item xs={12} sm={6}>
+                        <TextField margin="normal"
+                                   id="m"
+                                   label="m"
+                                   type="number"
+                                   onChange={this.mChange}/>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField margin="normal"
+                                   id="n"
+                                   label="n"
+                                   type="number"
+                                   onChange={this.nChange}/>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField margin="normal"
+                                   id="cs"
+                                   label="cs"
+                                   type="number"
+                                   onChange={this.csChange}/>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField margin="normal"
+                                   id="cw"
+                                   label="cw"
+                                   type="number"
+                                   onChange={this.cwChange}/>
+                    </Grid>
+                </Grid>
+                <Button variant="contained" color="primary" onClick={this.handleClick}>Calcular</Button>
+            </form>
+
             { this.state.showResults ?
                 Number(this.state.lambda) >= Number(this.state.m) ?
                     <div className="alert alert-danger" role="alert">
@@ -242,16 +248,16 @@ class Mm1 extends Component{
                         <Typography variant="h4" gutterBottom>
                             Resultados
                         </Typography>
-                    <ul className="list-group">
-                        <li className="list-group-item">Factor de Utilización (Ρ): <strong>{ this.state.p }</strong></li>
-                        <li className="list-group-item">Probabilidad 0 Clientes en la Sistema (P0): <strong>{ this.state.p0 }</strong></li>
-                        <li className="list-group-item">Promedio Clientes en la Cola (LQ): <strong>{ this.state.lq }</strong></li>
-                        <li className="list-group-item">Promedio Clientes en el Sistema (L): <strong>{ this.state.l }</strong></li>
-                        <li className="list-group-item">Tiempo Esperado en la Cola (WQ): <strong>{ this.state.wq }</strong></li>
-                        <li className="list-group-item">Tiempo Esperado en el Sistema (W): <strong>{ this.state.w }</strong></li>
-                        <li className="list-group-item">Probabilidad (Pn): <strong>{ this.state.pn }</strong></li>
-                        <li className="list-group-item">Costo Total Esperado (CT): <strong>{ this.state.ct }</strong></li>
-                    </ul>
+                        <ul className="list-group">
+                            <li className="list-group-item">Factor de Utilización (Ρ): <strong>{ this.state.p }</strong></li>
+                            <li className="list-group-item">Probabilidad 0 Clientes en la Sistema (P0): <strong>{ this.state.p0 }</strong></li>
+                            <li className="list-group-item">Promedio Clientes en la Cola (LQ): <strong>{ this.state.lq }</strong></li>
+                            <li className="list-group-item">Promedio Clientes en el Sistema (L): <strong>{ this.state.l }</strong></li>
+                            <li className="list-group-item">Tiempo Esperado en la Cola (WQ): <strong>{ this.state.wq }</strong></li>
+                            <li className="list-group-item">Tiempo Esperado en el Sistema (W): <strong>{ this.state.w }</strong></li>
+                            <li className="list-group-item">Probabilidad (Pn): <strong>{ this.state.pn }</strong></li>
+                            <li className="list-group-item">Costo Total Esperado (CT): <strong>{ this.state.ct }</strong></li>
+                        </ul>
                     </div>
                 :
                 <div></div>
