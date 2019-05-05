@@ -181,6 +181,11 @@ class Mm1 extends Component{
         let res = Number(lq) * Number(cw) + Number(cs);
         this.setState({ct: res.toFixed(4)});
     }
+    
+    handleClick() {
+        console.log('calculating queue');
+        this.setState({showResults:true});
+    }
 
     handleClick() {
         this.setState({showResults:true});
@@ -233,6 +238,7 @@ class Mm1 extends Component{
                 </Grid>
                 <Button variant="contained" color="primary" onClick={this.handleClick}>Calcular</Button>
             </form>
+
             { this.state.showResults ?
                 Number(this.state.lambda) >= Number(this.state.m) ?
                     <div className="alert alert-danger" role="alert">
