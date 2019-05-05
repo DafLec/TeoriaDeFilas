@@ -70,7 +70,7 @@ class Mg1 extends Component{
            let k = parseInt(this.state.k);
            let lq = 0;
            if(k !== null){
-           lq = ((1+k)/(2*k)) * (Math.pow(lambda,2)/(m(m-lambda)));}
+           lq = ((1+k)/(2*k)) * (Math.pow(lambda,2)/(m*(m-lambda)));}
            let wq = lq/lambda;
            let w = wq + (1/m);
            let l = w * lambda;

@@ -221,14 +221,20 @@ class Mmsk extends Component{
         const m = this.state.m;
         const s = this.state.s;
         const k = this.state.k;
-        let sum = 0, mult = 0, factor2 = 0;
-        for(let i = 0; i < s; i++){
+        let sum = 0;
+        let mult = 0;
+        for(let i = 0; i <= s; i++){
             sum += (Math.pow(lambda/m,i)/ Mmsk.factorial(i));
         }
         let factor1 = (Math.pow(lambda/m,s)/ Mmsk.factorial(s));
-        for(let j = parseInt(s)+1; j <= k; j++){
-            factor2 += (Math.pow(lambda/(s*m),j-s));
+        let factor2 = 0;
+        for(let j = Number(s)+1; j <= k; j++){
+          console.log("j",j);
+          console.log("s", s);
+          console.log("x", Math.pow(lambda, (s*m), j-s));
+            factor2 += (Math.pow((lambda/(s*m)),(j-s)));
         }
+        console.log("f2", factor2);
         mult = factor1 * factor2;
         let p0 = 1/(sum+mult);
         this.setState({p0: p0.toFixed(4)});
@@ -271,7 +277,7 @@ class Mmsk extends Component{
         const p = this.calculateP();
         const p0 = this.calculateP0();
         let numerator = Math.pow(lambda/m,s) * lambda * m * p0;
-        let denominator = Mmsk.factorial(s-1) * Math.pow(s(m-lambda),2);
+        let denominator = Mmsk.factorial(s-1) * Math.pow(s/(m-lambda),2);
         let mult = 1 - Math.pow(p, k-s) - ((k-s) * Math.pow(p,k-s) * (1-p));
         let res = (numerator/denominator) * mult;
         this.setState({lq: res.toFixed(4)});

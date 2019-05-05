@@ -187,12 +187,13 @@ class Mms extends Component{
         const lambda = this.state.lambda;
         const m = this.state.m;
         const s = this.state.s;
-        let sum = 0, mult = 0;
+        let sum = 0;
+        let mult = 0;
         for(let i = 0; i < s; i++){
             sum += (Math.pow(lambda/m,i)/ Mms.factorial(i));
         }
         let factor1 = (Math.pow(lambda/m,s)/ Mms.factorial(s));
-        let factor2 = (s*m)/(s*(m-lambda));
+        let factor2 = 1 / (1 - (lambda / (s*m)));
         mult = factor1 * factor2;
         let p0 = 1/(sum+mult);
         this.setState({p0: p0.toFixed(4)});
@@ -212,8 +213,8 @@ class Mms extends Component{
         const m = this.state.m;
         const s = this.state.s;
         const p0 = this.calculateP0();
-        let numerator = Math.pow(lambda/m,s) * lambda * m * p0;
-        let denominator = Mms.factorial(s-1) * Math.pow(s*(m-lambda),2);
+        let numerator = Math.pow(lambda/m,s) * lambda * p0;
+        let denominator = Mms.factorial(s) * s * m * Math.pow((1 - (lambda / (s*m))),2);
         let res = numerator/denominator;
         this.setState({lq: res.toFixed(4)});
         return res;
