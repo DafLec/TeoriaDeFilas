@@ -10,7 +10,7 @@ const lambda = 0,  m = 0, p = 0, pn = 0, p0 = 0, n = 0, s = 0;
 //Cost and function variables
 const l = 0, lq = 0, w = 0, wq = 0;
 const cs = 0, cw = 0, ct = 0;
-var showResults = false;
+const showResults = false;
 
 class Mms extends Component{
 
@@ -192,7 +192,7 @@ class Mms extends Component{
             sum += (Math.pow(lambda/m,i)/ Mms.factorial(i));
         }
         let factor1 = (Math.pow(lambda/m,s)/ Mms.factorial(s));
-        let factor2 = (s*m)/(s*(m-lambda));
+        let factor2 = (s*m)/(s * (m-lambda));
         mult = factor1 * factor2;
         let p0 = 1/(sum+mult);
         this.setState({p0: p0.toFixed(4)});
@@ -213,7 +213,7 @@ class Mms extends Component{
         const s = this.state.s;
         const p0 = this.calculateP0();
         let numerator = Math.pow(lambda/m,s) * lambda * m * p0;
-        let denominator = Mms.factorial(s-1) * Math.pow(s*(m-lambda),2);
+        let denominator = Mms.factorial(s-1) * Math.pow(s * (m-lambda),2);
         let res = numerator/denominator;
         this.setState({lq: res.toFixed(4)});
         return res;
@@ -261,6 +261,7 @@ class Mms extends Component{
                                    id="lambda"
                                    label="lambda"
                                    type="number"
+                                   inputProps={{ min: "1"}}
                                    onChange={this.lambdaChange}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -268,6 +269,7 @@ class Mms extends Component{
                                    id="m"
                                    label="m"
                                    type="number"
+                                   inputProps={{ min: "1"}}
                                    onChange={this.mChange}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -275,6 +277,7 @@ class Mms extends Component{
                                    id="s"
                                    label="s"
                                    type="number"
+                                   inputProps={{ min: "1"}}
                                    onChange={this.sChange}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -282,6 +285,7 @@ class Mms extends Component{
                                    id="n"
                                    label="n"
                                    type="number"
+                                   inputProps={{ min: "1"}}
                                    onChange={this.nChange}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -289,6 +293,7 @@ class Mms extends Component{
                                    id="cs"
                                    label="cs"
                                    type="number"
+                                   inputProps={{ min: "1"}}
                                    onChange={this.csChange}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -296,6 +301,7 @@ class Mms extends Component{
                                    id="cw"
                                    label="cw"
                                    type="number"
+                                   inputProps={{ min: "1"}}
                                    onChange={this.cwChange}/>
                     </Grid>
                 </Grid>
