@@ -309,7 +309,7 @@ class Mms extends Component{
                 <Button variant="contained" color="primary" onClick={this.handleClick}>Calcular</Button>
             </form>
             { this.state.showResults ?
-                Number(this.state.lambda) >= Number(this.state.m) ?
+                Number(this.state.lambda) >= Number(this.state.m) || Number(this.state.s) <= 0 ?
                     <div className="alert alert-danger" role="alert">
                         Sistema no estable
                     </div> :
