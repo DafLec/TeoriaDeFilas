@@ -288,7 +288,7 @@ class Mg1 extends Component{
             { this.state.showResults ?
                 Number(this.state.lambda) >= Number(this.state.m) ?
                     <div className="alert alert-danger" role="alert">
-                        Sistema no estable
+                            Sistema no estable
                     </div> :
                     <div>
                         <Typography variant="h4" gutterBottom>
