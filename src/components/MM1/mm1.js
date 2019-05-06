@@ -35,7 +35,12 @@ class Mm1 extends Component{
     }
 
     validateForm() {
-        return this.state.lambda.length > 0 && this.state.m.length;
+        console.log(this.state.lambda);
+        return this.state.lambda.length > 0 && this.state.m.length > 0;
+    }
+
+    invalidData() {
+        return (Number(this.state.lambda) <= 0 || Number(this.state.lambda) >= Number(this.state.m));
     }
 
     //Handle changes in variables
@@ -244,7 +249,7 @@ class Mm1 extends Component{
             </form>
 
             { this.state.showResults ?
-                Number(this.state.lambda) >= Number(this.state.m) ?
+                this.invalidData() ?
                     <div className="alert alert-danger" role="alert">
                         Sistema no estable
                     </div> :
