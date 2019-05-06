@@ -34,6 +34,10 @@ class Mm1 extends Component{
         this.handleClick = this.handleClick.bind(this);
     }
 
+    validateForm() {
+        return this.state.lambda.length > 0 && this.state.m.length;
+    }
+
     //Handle changes in variables
     lambdaChange(evt){
         if(Number(evt.target.value) < 0){
@@ -236,7 +240,7 @@ class Mm1 extends Component{
                                    onChange={this.cwChange}/>
                     </Grid>
                 </Grid>
-                <Button variant="contained" color="primary" onClick={this.handleClick}>Calcular</Button>
+                <Button variant="contained" color="primary" onClick={this.handleClick} disabled={!this.validateForm()}>Calcular</Button>
             </form>
 
             { this.state.showResults ?

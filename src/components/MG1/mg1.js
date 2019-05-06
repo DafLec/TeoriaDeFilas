@@ -58,8 +58,7 @@ class Mg1 extends Component{
     }
 
     validateForm() {
-        return this.state.lambda.length > 0 && this.state.m.length > 0 && this.state.n.length > 0 &&
-            this.state.cs.length > 0 && this.state.cw.length > 0;
+        return this.state.lambda.length > 0 && this.state.m.length > 0 && this.state.funSelected;
     }
 
     //Handle changes in variables
@@ -213,7 +212,7 @@ class Mg1 extends Component{
 
         return (<React.Fragment>
             <Typography variant="h3" gutterBottom>
-                M/M/G/1
+                M/G/1
             </Typography>
 
             <form id="form">
