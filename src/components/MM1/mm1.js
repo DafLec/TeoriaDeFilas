@@ -208,46 +208,46 @@ class Mm1 extends Component{
                     <Grid item xs={12} sm={6}>
                         <TextField margin="normal"
                                    id="lambda"
-                                   label="lambda"
+                                   label="Tasa media de llegada (λ)"
                                    type="number"
-                                   inputProps={{ min: "1"}}
+                                   inputProps={{ min: "1", style: {fontSize: 25}}}
                                    onChange={this.lambdaChange}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField margin="normal"
                                    id="m"
-                                   label="m"
+                                   label="Tasa media de servicio (μ)"
                                    type="number"
-                                   inputProps={{ min: "1"}}
+                                   inputProps={{ min: "1", style: {fontSize: 25}}}
                                    onChange={this.mChange}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField margin="normal"
                                    id="n"
-                                   label="n"
+                                   label="N para calcular Pn"
                                    type="number"
-                                   inputProps={{ min: "1"}}
+                                   inputProps={{ min: "1", style: {fontSize: 25}}}
                                    onChange={this.nChange}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField margin="normal"
                                    id="cs"
-                                   label="cs"
+                                   label="Costo del servicio (cs)"
                                    type="number"
-                                   inputProps={{ min: "1"}}
+                                   inputProps={{ min: "1", style: {fontSize: 25}}}
                                    onChange={this.csChange}/>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item sm={6}>
                         <TextField margin="normal"
                                    id="cw"
-                                   label="cw"
+                                   label="Costo de tiempo de espera (cw)"
                                    type="number"
-                                   inputProps={{ min: "1"}}
+                                   inputProps={{ min: "1", style: {fontSize: 25}}}
                                    onChange={this.cwChange}/>
                     </Grid>
                 </Grid>
-                <Button variant="contained" color="primary" onClick={this.handleClick} disabled={!this.validateForm()}>Calcular</Button>
+                <br/><br/><Button variant="contained" color="primary" onClick={this.handleClick} disabled={!this.validateForm()}>Calcular</Button>
             </form>
             <br/>
             { this.state.showResults ?
