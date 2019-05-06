@@ -9,7 +9,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
 //User variables
-const lambda = 0,  m = 0, p = 0, pn = 0, p0 = 0, n = 0;
+const lambda = 0,  m = 0, p = 0, pn = 0, p0 = 0, n = 0, k = 0;
 
 //Cost and function variables
 const l = 0, lq = 0, w = 0, wq = 0;
@@ -21,7 +21,7 @@ class Mg1 extends Component{
 
    constructor(props) {
         super(props);
-        this.state = {lambda, m, p, pn, p0, n, l, lq, w, wq, cs, cw, ct, showResults, funSelected};
+        this.state = {lambda, m, k, p, pn, p0, n, l, lq, w, wq, cs, cw, ct, showResults, funSelected};
         this.lambdaChange = this.lambdaChange.bind(this);
         this.mChange = this.mChange.bind(this);
         this.nChange = this.nChange.bind(this);
@@ -287,6 +287,7 @@ class Mg1 extends Component{
                 </Grid>
                 <Button variant="contained" color="primary" onClick={this.handleClick} disabled={!this.validateForm()}>Calcular</Button>
             </form>
+            <br/>
             { this.state.showResults ?
                 Number(this.state.lambda) >= Number(this.state.m) ?
                     <div className="alert alert-danger" role="alert">

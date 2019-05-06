@@ -10,13 +10,14 @@ const lambda = 0,  m = 0, p = 0, pn = 0, p0 = 0, n = 0, s = 0, k = 0;
 //Cost and function variables
 const l = 0, lq = 0, w = 0, wq = 0;
 const cs = 0, cw = 0, ct = 0;
+const el = 0;
 const showResults = false;
 
 class Mmsk extends Component{
 
     constructor(props){
         super(props);
-        this.state = {lambda, m, p, pn, p0, n, s, k, l, lq, w, wq, cs, cw, ct, showResults};
+        this.state = {lambda, m, p, pn, p0, n, s, k, l, lq, el, w, wq, cs, cw, ct, showResults};
         this.lambdaChange = this.lambdaChange.bind(this);
         this.mChange = this.mChange.bind(this);
         this.calculateP = this.calculateP.bind(this);
@@ -259,7 +260,10 @@ class Mmsk extends Component{
     effectiveLambda(){
         const lambda = this.state.lambda;
         const pk = this.calculatePk();
-        return lambda * (1-pk);
+        let res = 0;
+        res = lambda * (1-pk);
+        this.setState({el: res.toFixed(4)});
+        return res;
     }
 
     calculateL(){
@@ -267,6 +271,7 @@ class Mmsk extends Component{
         const eLambda = this.effectiveLambda();
         let res = w * eLambda;
         this.setState({l: res.toFixed(4)});
+        return res;
     }
 
     calculateLq(){
@@ -307,6 +312,7 @@ class Mmsk extends Component{
         const lq = this.calculateLq();
         let res = (lq * cw) + (s * cs);
         this.setState({ct: res.toFixed(4)});
+        return res;
     }
 
     handleClick() {
@@ -380,6 +386,7 @@ class Mmsk extends Component{
                 </Grid>
                 <Button variant="contained" color="primary" onClick={this.handleClick}>Calcular</Button>
             </form>
+            <br/>
             { this.state.showResults ?
             Number(this.state.lambda) >= Number(this.state.m) ?
                 <div className="alert alert-danger" role="alert">
@@ -398,6 +405,7 @@ class Mmsk extends Component{
                         <li className="list-group-item">Tiempo Esperado en el Sistema (W): <strong>{ this.state.w }</strong></li>
                         <li className="list-group-item">Probabilidad (Pn): <strong>{ this.state.pn }</strong></li>
                         <li className="list-group-item">Costo Total Esperado (CT): <strong>{ this.state.ct }</strong></li>
+                        <li className="list-group-item">Tasa Efectiva de Llegada (Lambda e): <strong>{ this.state.el }</strong></li>
                     </ul>
                 </div>
             :

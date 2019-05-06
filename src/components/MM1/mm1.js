@@ -238,7 +238,7 @@ class Mm1 extends Component{
                 </Grid>
                 <Button variant="contained" color="primary" onClick={this.handleClick}>Calcular</Button>
             </form>
-
+            <br/>
             { this.state.showResults ?
                 Number(this.state.lambda) >= Number(this.state.m) ?
                     <div className="alert alert-danger" role="alert">
