@@ -1,21 +1,24 @@
 {
-  "name": "proyecto2",
+  "name": "SIMULADOR DE MODELOS DE FILAS DE ESPERA",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
-    "fsevents": "^2.0.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
     "truffle": "^5.0.15"
   },
+  "main": "src/electron-starter.js",
+  "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electrondev": "set ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "dev" : "nf start"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,5 +34,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "electron": "^5.0.1",
+    "foreman": "^3.0.1"
   }
 }
