@@ -42,6 +42,8 @@ class Mg1 extends Component{
 
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value });
+        this.setState({showResults: false});
+
     };
 
     handleClick() {
@@ -58,56 +60,92 @@ class Mg1 extends Component{
     }
 
     validateForm() {
-        return this.state.lambda.length > 0 && this.state.m.length > 0 && this.state.n.length > 0 &&
-            this.state.cs.length > 0 && this.state.cw.length > 0;
+        if(this.state.lambda.length > 0 && this.state.m.length > 0 && this.state.funSelected.length !== 0){
+            if(Number(this.state.funSelected)==3){
+                return this.state.k.length > 0;
+            }else{
+                return true;
+            }
+        }else{
+            return false;
+        }
+    }
+
+    invalidData() {
+            if((Number(this.state.lambda) <= 0 ||
+            Number(this.state.lambda) >= Number(this.state.m) ||
+            Number(this.state.n) < 0 ||
+            Number(this.state.n)%1 !==0)){
+                if (this.state.funSelected == 3) {
+                    return Number(this.state.k) <= 0 ||  Number(this.state.k)%1 !== 0;
+                }else{
+                    return true;
+                }
+            }else{
+                return false;
+            }
+
+
     }
 
     //Handle changes in variables
     lambdaChange(evt){
         if(Number(evt.target.value) < 0){
             this.setState({lambda : 0});
+            this.setState({showResults: false});
         }else{
             this.setState({lambda : evt.target.value});
+            this.setState({showResults: false});
         }
     }
 
     mChange(evt){
         if(Number(evt.target.value) < 0){
             this.setState({m: 0});
+            this.setState({showResults: false});
         }else{
             this.setState({m: evt.target.value});
+            this.setState({showResults: false});
         }
     }
 
     nChange(evt){
         if(Number(evt.target.value) < 0){
             this.setState({n: 0});
+            this.setState({showResults: false});
         }else{
             this.setState({n: evt.target.value});
+            this.setState({showResults: false});
         }
     }
 
     kChange(evt){
         if(Number(evt.target.value) < 0){
             this.setState({k : 0});
+            this.setState({showResults: false});
         }else{
             this.setState({k : evt.target.value});
+            this.setState({showResults: false});
         }
     }
 
     csChange(evt){
         if(Number(evt.target.value < 0)){
             this.setState({cs : 0});
+            this.setState({showResults: false});
         }else{
             this.setState({cs : evt.target.value});
+            this.setState({showResults: false});
         }
     }
 
     cwChange(evt){
         if(Number(evt.target.value < 0)){
             this.setState({cw : 0});
+            this.setState({showResults: false});
         }else{
             this.setState({cw : evt.target.value});
+            this.setState({showResults: false});
         }
     }
 
@@ -187,7 +225,6 @@ class Mg1 extends Component{
         const wq = this.calculateWq();
         let res = 0
         res =  wq + (1 / m);
-        console.log(res);
         this.setState({w: Number(res).toFixed(4)});
         return res;
     }
@@ -195,8 +232,7 @@ class Mg1 extends Component{
     calculateWq(){
         const lambda = Number(this.state.lambda);
         const lq = this.calculateLq();
-        let res = 0
-        res = lq / lambda;
+        let res = lq / lambda;
         this.setState({wq: Number(res).toFixed(4)});
         return res;
     }
@@ -205,8 +241,7 @@ class Mg1 extends Component{
         const cs = Number(this.state.cs);
         const cw = Number(this.state.cw);
         const lq = Number(this.state.lq);
-        let res = 0
-        res = (lq * cw) +  cs;
+        let res = (lq * cw) +  cs;
         this.setState({ct: Number(res).toFixed(4)});
         return res;
     }
@@ -252,14 +287,17 @@ class Mg1 extends Component{
                                    inputProps={{ min: "1"}}
                                    onChange={this.mChange}/>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField margin="normal"
-                                   id="k"
-                                   label="k"
-                                   type="number"
-                                   inputProps={{ min: "1"}}
-                                   onChange={this.kChange}/>
-                    </Grid>
+                    {this.state.funSelected == 3 ?
+                        <Grid item xs={12} sm={6}>
+                            <TextField margin="normal"
+                                       id="k"
+                                       label="k"
+                                       type="number"
+                                       inputProps={{ min: "1"}}
+                                       onChange={this.kChange}/>
+                        </Grid>:
+                        <div></div>
+                    }
                     <Grid item xs={12} sm={6}>
                         <TextField margin="normal"
                                    id="n"
@@ -289,7 +327,7 @@ class Mg1 extends Component{
             </form>
             <br/>
             { this.state.showResults ?
-                Number(this.state.lambda) >= Number(this.state.m) ?
+                this.invalidData() ?
                     <div className="alert alert-danger" role="alert">
                             Sistema no estable
                     </div> :
