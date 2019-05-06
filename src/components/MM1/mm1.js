@@ -35,12 +35,14 @@ class Mm1 extends Component{
     }
 
     validateForm() {
-        console.log(this.state.lambda);
         return this.state.lambda.length > 0 && this.state.m.length > 0;
     }
 
     invalidData() {
-        return (Number(this.state.lambda) <= 0 || Number(this.state.lambda) >= Number(this.state.m));
+        return (Number(this.state.lambda) <= 0 ||
+            Number(this.state.lambda) >= Number(this.state.m) ||
+            Number(this.state.n) < 0 ||
+            Number(this.state.n)%1 !== 0);
     }
 
     //Handle changes in variables

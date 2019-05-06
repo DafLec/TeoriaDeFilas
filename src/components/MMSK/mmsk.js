@@ -39,7 +39,19 @@ class Mmsk extends Component{
     }
 
     validateForm() {
-        return this.state.lambda.length > 0 && this.state.m.length > 0 && this.state.s.length > 0;
+        return this.state.lambda.length > 0 && this.state.m.length > 0 && this.state.s.length > 0 && this.state.k.length > 0;
+    }
+
+    invalidData() {
+        return (Number(this.state.lambda) <= 0 ||
+            Number(this.state.lambda) >= Number(this.state.m) ||
+            Number(this.state.s) <= 0 ||
+            Number(this.state.s)%1 !== 0 ||
+            Number(this.state.k)<=0 ||
+            Number(this.state.k)%1 !== 0 ||
+            Number(this.state.s) > Number(this.state.k) ||
+            Number(this.state.n) < 0 ||
+            Number(this.state.n)%1 !==0);
     }
 
     //Handle changes in variables
@@ -385,7 +397,7 @@ class Mmsk extends Component{
                 <Button variant="contained" color="primary" onClick={this.handleClick} disabled={!this.validateForm()}>Calcular</Button>
             </form>
             { this.state.showResults ?
-            Number(this.state.lambda) >= Number(this.state.m) || Number(this.state.s) <= 0 || Number(this.state.k) < 0?
+            this.invalidData()?
                 <div className="alert alert-danger" role="alert">
                     Sistema no estable
                 </div> :
